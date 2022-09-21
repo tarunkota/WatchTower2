@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-g@4_31z3v+^(vs3t=+14q&3$7)pak8lj#4kc3f%ojkuq)qn9z@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['34.100.132.233', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -37,6 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # installed
+    'django_crontab',
+    'rest_framework',
+    'rest_framework.authtoken',  # <-- Here
+    # our apps
+    'Core',
 ]
 
 MIDDLEWARE = [
@@ -105,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -121,3 +128,28 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Crontab
+CRONJOBS = [
+    ('* * * * *', 'Core.crons.everyMinuteCron'),
+    ('*/10 * * * *', 'Core.crons.every10MinuteCron'),
+    ('0 * * * *', 'Core.crons.everyHourCron'),
+    ('0 */6 * * *', 'Core.crons.every6HoursCron'),
+    ('0 */12 * * *', 'Core.crons.every12HoursCron'),
+    ('0 0 * * *', 'Core.crons.every24HoursCron'),
+]
+
+# rest framework
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",  # <-- And here
+    ],
+}
+
+# static files
+
+
+if os.environ.get("DJANGO_DEVELOPMENT"):
+    from .devSettings import *  # or specific overrides
