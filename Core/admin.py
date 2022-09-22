@@ -5,4 +5,10 @@ admin.site.register(Frequency)
 admin.site.register(Project)
 admin.site.register(Metric)
 admin.site.register(Module)
-admin.site.register(MetricValue)
+
+
+class MetricValueAdmin(admin.ModelAdmin):
+    list_filter = ['metric']
+
+
+admin.site.register(MetricValue, MetricValueAdmin)
