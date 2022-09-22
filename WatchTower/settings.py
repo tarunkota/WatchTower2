@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     # installed
     'django_crontab',
     'rest_framework',
-    'rest_framework.authtoken',  # <-- Here
+    'rest_framework.authtoken',
+    'corsheaders',
     # our apps
     'Core',
 ]
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -162,3 +164,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 if os.environ.get("DJANGO_DEVELOPMENT"):
     from .devSettings import *  # or specific overrides
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:9000',
+]
