@@ -10,7 +10,7 @@ getAllModuleValues(Frequency.objects.get(pk=2))
 everyMinuteCron()
 
 
-# curl -H "Authorization: Token 21b206df29ff8cab106f4c5246b2ea630dc3c7a7" 'http://localhost:9000/api/metrics/?project=Naulets&metric=Test&count=10'
+# curl -H "Authorization: Token 26dfff2194624539794f5c1fb53e869670cdaf26" 'http://34.100.227.133/api/metrics/?project=Naulets&metric=Test&count=10'
 
 # curl -H "Authorization: Token 21b206df29ff8cab106f4c5246b2ea630dc3c7a7" 'http://localhost:9000/api/module/?project=Naulets&module=Test'
 
